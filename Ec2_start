@@ -1,0 +1,25 @@
+
+import boto3
+
+# Replace these values with your AWS credentials
+aws_access_key_id = 'YOUR_ACCESS_KEY_ID'
+aws_secret_access_key = 'YOUR_SECRET_ACCESS_KEY'
+region_name = 'YOUR_REGION_NAME'
+
+# Create a session using your credentials
+session = boto3.Session(
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    region_name=region_name
+)
+
+# Create an EC2 client
+ec2 = session.client('ec2')
+
+# Specify the instance IDs you want to start
+instance_ids = ['INSTANCE_ID_1', 'INSTANCE_ID_2']  # Replace with your instance IDs
+
+# Start the EC2 instances
+ec2.start_instances(InstanceIds=instance_ids)
+
+print('Instances started successfully!')
