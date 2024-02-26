@@ -1,0 +1,51 @@
+import boto3
+
+def start_ec2_instance_by_ip(ip_address):
+    # Initialize the EC2 client
+    ec2 = boto3.client('ec2')
+
+    # Describe instances to get instance details by IP address
+    response = ec2.describe_instances(Filters=[{'Name': 'private-ip-address', 'Values': [ip_address]}])
+
+    # Check if there is at least one instance with the given IP address
+    if not response['Reservations']:
+        print(f"No EC2 instance found with IP address {ip_address}")
+        return
+
+    # Extract instance ID
+    instance_id = response['Reservations'][0]['Instances'][0]['InstanceId']
+
+    # Start the EC2 instance
+    ec2.start_instances(InstanceIds=[instance_id])
+
+    print(f"Started EC2 instance with IP address {ip_address} (Instance ID: {instance_id})")
+
+# Replace 'your_ip_address' with the actual IP address you want to use
+start_ec2_instance_by_ip('your_ip_address')
+
+##########################################################################################################
+
+import boto3
+
+def start_ec2_instance_by_ip(ip_address):
+    # Initialize the EC2 client
+    ec2 = boto3.client('ec2')
+
+    # Describe instances to get instance details by IP address
+    response = ec2.describe_instances(Filters=[{'Name': 'private-ip-address', 'Values': [ip_address]}])
+
+    # Check if there is at least one instance with the given IP address
+    if not response['Reservations']:
+        print(f"No EC2 instance found with IP address {ip_address}")
+        return
+
+    # Extract instance ID
+    instance_id = response['Reservations'][0]['Instances'][0]['InstanceId']
+
+    # Start the EC2 instance
+    ec2.start_instances(InstanceIds=[instance_id])
+
+    print(f"Started EC2 instance with IP address {ip_address} (Instance ID: {instance_id})")
+
+# Replace '10.40.11.123' with the actual IP address you want to use
+start_ec2_instance_by_ip('10.40.11.123')
